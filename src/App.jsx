@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { DashboardLayout } from './components/layout/DashboardLayout';
-import { PortfolioView } from './views/PortfolioView';
+import { PortafolioView } from './views/PortafolioView';
 import { ProjectDetailView } from './views/ProjectDetailView';
 import { projects } from './data/mockData';
 
 function App() {
-  const [currentView, setCurrentView] = useState('portfolio'); // portfolio, analytics, settings, or project-detail
+  const [currentView, setCurrentView] = useState('portafolio'); // portafolio, analytics, settings, or project-detail
   const [selectedProjectId, setSelectedProjectId] = useState(null);
 
   const handleProjectSelect = (project) => {
@@ -20,10 +20,10 @@ function App() {
 
   const renderContent = () => {
     switch (currentView) {
-      case 'portfolio':
-        return <PortfolioView onProjectSelect={handleProjectSelect} />;
+      case 'portafolio':
+        return <PortafolioView onProjectSelect={handleProjectSelect} />;
       case 'project-detail':
-        return <ProjectDetailView projectId={selectedProjectId} onBack={() => setCurrentView('portfolio')} />;
+        return <ProjectDetailView projectId={selectedProjectId} onBack={() => setCurrentView('portafolio')} />;
       case 'analytics':
         return (
           <div className="flex items-center justify-center h-96 text-slate-400">
@@ -37,7 +37,7 @@ function App() {
           </div>
         );
       default:
-        return <PortfolioView onProjectSelect={handleProjectSelect} />;
+        return <PortafolioView onProjectSelect={handleProjectSelect} />;
     }
   };
 

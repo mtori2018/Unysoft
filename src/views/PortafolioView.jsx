@@ -5,7 +5,7 @@ import { Button } from '../components/ui/Button';
 import { projects } from '../data/mockData';
 import { ArrowRight, TrendingUp, AlertCircle, CheckCircle2 } from 'lucide-react';
 
-export function PortfolioView({ onProjectSelect }) {
+export function PortafolioView({ onProjectSelect }) {
     const getStatusBadge = (status) => {
         switch (status) {
             case 'success': return <Badge variant="success">En Plazo</Badge>;
@@ -23,7 +23,7 @@ export function PortfolioView({ onProjectSelect }) {
         <div className="space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                    <h2 className="text-3xl font-bold tracking-tight text-slate-900">Portfolio de Obras</h2>
+                    <h2 className="text-3xl font-bold tracking-tight text-slate-900">Portafolio de Obras</h2>
                     <p className="text-slate-500 mt-1">Vista general del estado de todos los proyectos activos.</p>
                 </div>
                 <div className="flex gap-2">

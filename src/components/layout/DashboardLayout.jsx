@@ -7,7 +7,7 @@ export function DashboardLayout({ children, currentView, onNavigate }) {
     const [sidebarOpen, setSidebarOpen] = useState(true);
 
     const navItems = [
-        { id: 'portfolio', label: 'Portfolio', icon: Building2 },
+        { id: 'portafolio', label: 'Portafolio', icon: Building2 },
         { id: 'analytics', label: 'Analytics', icon: PieChart },
         { id: 'settings', label: 'Configuración', icon: Settings },
     ];
