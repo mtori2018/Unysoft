@@ -20,25 +20,27 @@ export function ProjectDetailView({ projectId, onBack }) {
     return (
         <div className="space-y-6 animate-in fade-in duration-500">
             {/* HeaderNav */}
-            <div className="flex items-center gap-4">
-                <Button variant="ghost" onClick={onBack} size="icon">
-                    <ArrowLeft className="h-5 w-5" />
-                </Button>
-                <div className="flex-1">
-                    <div className="flex items-center gap-3">
-                        <h1 className="text-3xl font-bold text-slate-900">{project.name}</h1>
-                        <Badge variant={project.status === 'success' ? 'success' : project.status === 'warning' ? 'warning' : 'destructive'}>
-                            {project.status === 'success' ? 'En Plazo' : project.status === 'warning' ? 'Riesgo' : 'Atrasado'}
-                        </Badge>
-                    </div>
-                    <div className="flex items-center gap-4 mt-1 text-slate-500 text-sm">
-                        <div className="flex items-center gap-1"><MapPin className="h-3 w-3" /> {project.location}</div>
-                        <div className="flex items-center gap-1"><Calendar className="h-3 w-3" /> {project.startDate} - {project.endDate}</div>
+            <div className="flex flex-col md:flex-row md:items-center gap-4">
+                <div className="flex items-center w-full md:w-auto gap-2">
+                    <Button variant="ghost" onClick={onBack} size="icon" className="-ml-2 md:ml-0">
+                        <ArrowLeft className="h-5 w-5" />
+                    </Button>
+                    <div className="flex-1 md:flex-none">
+                        <div className="flex items-center gap-3 flex-wrap">
+                            <h1 className="text-2xl md:text-3xl font-bold text-slate-900">{project.name}</h1>
+                            <Badge variant={project.status === 'success' ? 'success' : project.status === 'warning' ? 'warning' : 'destructive'}>
+                                {project.status === 'success' ? 'En Plazo' : project.status === 'warning' ? 'Riesgo' : 'Atrasado'}
+                            </Badge>
+                        </div>
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mt-1 text-slate-500 text-sm">
+                            <div className="flex items-center gap-1"><MapPin className="h-3 w-3" /> {project.location}</div>
+                            <div className="flex items-center gap-1"><Calendar className="h-3 w-3" /> {project.startDate} - {project.endDate}</div>
+                        </div>
                     </div>
                 </div>
-                <div className="flex gap-2">
-                    <Button variant="outline"><FileText className="h-4 w-4 mr-2" /> Reporte Semanal</Button>
-                    <Button variant="default"><Download className="h-4 w-4 mr-2" /> Exportar ERP</Button>
+                <div className="flex gap-2 w-full md:w-auto md:ml-auto">
+                    <Button variant="outline" className="flex-1 md:flex-none"><FileText className="h-4 w-4 mr-2" /> Reporte</Button>
+                    <Button variant="default" className="flex-1 md:flex-none"><Download className="h-4 w-4 mr-2" /> Exportar</Button>
                 </div>
             </div>
 
@@ -64,13 +66,13 @@ export function ProjectDetailView({ projectId, onBack }) {
             )}
 
             {/* Tabs */}
-            <div className="border-b border-slate-200">
-                <nav className="-mb-px flex space-x-8">
+            <div className="border-b border-slate-200 overflow-x-auto">
+                <nav className="-mb-px flex space-x-8 min-w-max px-1">
                     <button
                         onClick={() => setActiveTab('office')}
                         className={`py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2 ${activeTab === 'office'
-                                ? 'border-primary text-primary'
-                                : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
+                            ? 'border-primary text-primary'
+                            : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
                             }`}
                     >
                         <DollarSign className="h-4 w-4" /> Oficina (Finanzas & Contratos)
@@ -78,8 +80,8 @@ export function ProjectDetailView({ projectId, onBack }) {
                     <button
                         onClick={() => setActiveTab('field')}
                         className={`py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2 ${activeTab === 'field'
-                                ? 'border-primary text-primary'
-                                : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
+                            ? 'border-primary text-primary'
+                            : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
                             }`}
                     >
                         <Camera className="h-4 w-4" /> Terreno (Avances & Fotos)
@@ -354,7 +356,7 @@ export function ProjectDetailView({ projectId, onBack }) {
                                                 <div className="w-24 bg-slate-200 rounded-full h-1.5 mt-1">
                                                     <div
                                                         className={`h-1.5 rounded-full ${item.status === 'completed' ? 'bg-success' :
-                                                                item.status === 'delayed' ? 'bg-danger' : 'bg-primary'
+                                                            item.status === 'delayed' ? 'bg-danger' : 'bg-primary'
                                                             }`}
                                                         style={{ width: `${(item.executed / item.total) * 100}%` }}
                                                     ></div>

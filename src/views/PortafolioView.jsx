@@ -23,12 +23,12 @@ export function PortafolioView({ onProjectSelect }) {
         <div className="space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                    <h2 className="text-3xl font-bold tracking-tight text-slate-900">Portafolio de Obras</h2>
+                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">Portafolio de Obras</h2>
                     <p className="text-slate-500 mt-1">Vista general del estado de todos los proyectos activos.</p>
                 </div>
-                <div className="flex gap-2">
-                    <Button variant="outline">Exportar Reporte</Button>
-                    <Button>Nueva Obra</Button>
+                <div className="flex w-full sm:w-auto gap-2">
+                    <Button variant="outline" className="flex-1 sm:flex-none">Exportar Reporte</Button>
+                    <Button className="flex-1 sm:flex-none">Nueva Obra</Button>
                 </div>
             </div>
 
@@ -78,7 +78,7 @@ export function PortafolioView({ onProjectSelect }) {
                     <Card key={project.id} className="cursor-pointer hover:shadow-md transition-shadow" onClick={() => onProjectSelect(project)}>
                         <div className="flex flex-col md:flex-row md:items-center">
                             {/* Project Info */}
-                            <div className="p-6 flex-1 min-w-[300px]">
+                            <div className="p-4 md:p-6 flex-1 min-w-0">
                                 <div className="flex items-center gap-3 mb-2">
                                     <div className="h-10 w-10 min-w-10 rounded bg-slate-100 flex items-center justify-center text-slate-500 font-bold">
                                         {project.name.substring(0, 2).toUpperCase()}
@@ -105,7 +105,7 @@ export function PortafolioView({ onProjectSelect }) {
                             </div>
 
                             {/* Progress Visuals */}
-                            <div className="p-6 flex-1 bg-slate-50/50 border-t md:border-t-0 md:border-l border-slate-100 h-full flex flex-col justify-center">
+                            <div className="p-4 md:p-6 flex-1 bg-slate-50/50 border-t md:border-t-0 md:border-l border-slate-100 h-full flex flex-col justify-center">
                                 <div className="flex items-center justify-between mb-2">
                                     <span className="text-sm font-medium text-slate-600">Avance Físico</span>
                                     <div className="flex items-center gap-2">

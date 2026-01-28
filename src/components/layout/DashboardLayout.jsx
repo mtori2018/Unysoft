@@ -4,7 +4,15 @@ import { cn } from '../../lib/utils';
 import { Button } from '../ui/Button';
 
 export function DashboardLayout({ children, currentView, onNavigate }) {
-    const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [sidebarOpen, setSidebarOpen] = useState(false); // Default closed on mobile, logic to check screen size could be added
+
+    // Auto-close sidebar on mobile when navigating
+    const handleNavigate = (id) => {
+        onNavigate(id);
+        if (window.innerWidth < 1024) {
+            setSidebarOpen(false);
+        }
+    };
 
     const navItems = [
         { id: 'portafolio', label: 'Portafolio', icon: Building2 },
@@ -17,8 +25,8 @@ export function DashboardLayout({ children, currentView, onNavigate }) {
             {/* Sidebar */}
             <aside
                 className={cn(
-                    "bg-slate-900 text-white transition-all duration-300 flex flex-col fixed inset-y-0 left-0 z-20",
-                    sidebarOpen ? "w-64" : "w-16"
+                    "bg-slate-900 text-white transition-all duration-300 flex flex-col fixed inset-y-0 left-0 z-30",
+                    sidebarOpen ? "w-64 translate-x-0" : "w-64 -translate-x-full lg:w-16 lg:translate-x-0"
                 )}
             >
                 <div className="h-16 flex items-center px-4 border-b border-slate-800">
@@ -32,7 +40,7 @@ export function DashboardLayout({ children, currentView, onNavigate }) {
                     {navItems.map((item) => (
                         <button
                             key={item.id}
-                            onClick={() => onNavigate(item.id)}
+                            onClick={() => handleNavigate(item.id)}
                             className={cn(
                                 "w-full flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-slate-800",
                                 currentView === item.id ? "bg-accent text-white" : "text-slate-400"
@@ -45,17 +53,25 @@ export function DashboardLayout({ children, currentView, onNavigate }) {
                 </nav>
 
                 <div className="p-4 border-t border-slate-800">
-                    {sidebarOpen && <div className="text-xs text-slate-500">v2.4.0 Enterprise</div>}
+                    {(sidebarOpen || (window.innerWidth >= 1024 && !sidebarOpen)) && <div className="text-xs text-slate-500">v2.4.0 Enterprise</div>}
                 </div>
             </aside>
+
+            {/* Overlay for mobile */}
+            {sidebarOpen && (
+                <div
+                    className="fixed inset-0 bg-black/50 z-20 lg:hidden"
+                    onClick={() => setSidebarOpen(false)}
+                />
+            )}
 
             {/* Main Content */}
             <main className={cn(
                 "flex-1 transition-all duration-300 flex flex-col min-h-screen",
-                sidebarOpen ? "ml-64" : "ml-16"
+                sidebarOpen ? "lg:ml-64" : "lg:ml-16"
             )}>
                 {/* Header */}
-                <header className="h-16 bg-white border-b border-slate-200 sticky top-0 z-10 px-6 flex items-center justify-between">
+                <header className="h-16 bg-white border-b border-slate-200 sticky top-0 z-10 px-4 md:px-6 flex items-center justify-between">
                     <Button variant="ghost" size="icon" onClick={() => setSidebarOpen(!sidebarOpen)}>
                         <Menu className="h-5 w-5" />
                     </Button>
@@ -78,7 +94,7 @@ export function DashboardLayout({ children, currentView, onNavigate }) {
                 </header>
 
                 {/* Content Body */}
-                <div className="p-6 md:p-8 flex-1">
+                <div className="p-4 md:p-6 lg:p-8 flex-1">
                     {children}
                 </div>
             </main>
